@@ -1,1 +1,110 @@
-<h2>index</h2>
+<div class="container">
+
+  <div class="col-8 mx-auto d-flex flex-row mb-3 align-items-end justify-content-start">
+    <div class="dropdown btn-block">
+      <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if monthFilter}}
+        {{monthFiltered}}
+        {{else}}
+        月份
+        {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton btn-block text-center">
+        <a class="dropdown-item" href="/record/filter?category={{categoryFiltered}}">所有月份</a>
+        <a class="dropdown-item" href="/record/filter?month=01&category={{categoryFiltered}}">一月</a>
+        <a class="dropdown-item" href="/record/filter?month=02&category={{categoryFiltered}}">二月</a>
+        <a class="dropdown-item" href="/record/filter?month=03&category={{categoryFiltered}}">三月</a>
+        <a class="dropdown-item" href="/record/filter?month=04&category={{categoryFiltered}}">四月</a>
+        <a class="dropdown-item" href="/record/filter?month=05&category={{categoryFiltered}}">五月</a>
+        <a class="dropdown-item" href="/record/filter?month=06&category={{categoryFiltered}}">六月</a>
+        <a class="dropdown-item" href="/record/filter?month=07&category={{categoryFiltered}}">七月</a>
+        <a class="dropdown-item" href="/record/filter?month=08&category={{categoryFiltered}}">八月</a>
+        <a class="dropdown-item" href="/record/filter?month=09&category={{categoryFiltered}}">九月</a>
+        <a class="dropdown-item" href="/record/filter?month=10&category={{categoryFiltered}}">十月</a>
+        <a class="dropdown-item" href="/record/filter?month=11&category={{categoryFiltered}}">十一月</a>
+        <a class="dropdown-item" href="/record/filter?month=12&category={{categoryFiltered}}">十二月</a>
+      </div>
+    </div>
+
+    <div class="dropdown btn-block">
+      <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if categoryFilter}}
+        {{categoryFiltered}}
+        {{else}}
+        類別
+        {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton btn-block text-center">
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}">所有類別</a>
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}&category=家居物業">家居物業</a>
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}&category=交通出行">交通出行</a>
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}&category=休閒娛樂">休閒娛樂</a>
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}&category=餐飲食品">餐飲食品</a>
+        <a class="dropdown-item" href="/record/filter?month={{monthFiltered}}&category=其他">其他</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-8 mx-auto mb-3">
+    <h4>總金額：</h4>
+    <h1 class="text-center text-danger mb-4">{{this.totalAmount}}</h1>
+  </div>
+
+  <div class="col-8 mx-auto table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-striped">
+      <tbody>
+        {{#each records}}
+        <tr>
+          <th class="text-right">
+            <div class="icon-wrapper pt-1">
+              <h1>
+                {{#if this.household}}
+                <i class="fas fa-home fa-sm align-middle"></i>
+                {{/if}}
+                {{#if this.transportation}}
+                <i class="fas fa-shuttle-van fa-xs align-middle"></i>
+                {{/if}}
+                {{#if this.entertainment}}
+                <i class="fas fa-grin-beam align-middle"></i>
+                {{/if}}
+                {{#if this.food}}
+                <i class="fas fa-utensils align-middle"></i>
+                {{/if}}
+                {{#if this.others}}
+                <i class="fas fa-pen align-middle"></i>
+                {{/if}}
+              </h1>
+            </div>
+          </th>
+          <td>
+            <div class="column pt-1">
+              <h4>{{ this.name }}</h4>
+              <p class="date">{{this.date}}</p>
+            </div>
+          </td>
+          <td class="align-middle text-center">
+            <h4 class="mr-4">{{ this.amount }}</h4>
+          </td>
+          <td class="align-middle">
+            <a href="/record/{{{this._id}}}/edit" class='btn btn-dark'>
+              修改
+            </a>
+          </td>
+          <td class="align-middle">
+            <form action="/record/{{{this._id}}}/delete?_method=DELETE" method="POST" style="display: contents;">
+              <button type="submit" class="btn btn-danger mr-3">刪除</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <a href="/record/new" class="btn btn-warning btn-lg mb-3 col-md-6 col-sm-8">新增支出</a>
+  </div>
+
+</div>
