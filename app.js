@@ -6,7 +6,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.render('index')
 })
 
 app.get('/record', (req, res) => {
