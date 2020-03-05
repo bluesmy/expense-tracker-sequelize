@@ -126,7 +126,8 @@ router.get('/filter', authenticated, (req, res) => {
         raw: true,
         where: {
           UserId: req.user.id
-        }
+        },
+        order: [['date', 'DESC']]
       })
         .then(records => {
 

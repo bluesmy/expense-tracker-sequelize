@@ -16,7 +16,8 @@ router.get('/', authenticated, (req, res) => {
         raw: true,
         where: {
           UserId: req.user.id
-        }
+        },
+        order: [['date', 'DESC']]
       })
         .then(records => {
           let totalAmount = 0
