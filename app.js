@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+
+const port = 3000
 
 const db = require('./models')
 const Record = db.Record
@@ -8,6 +12,9 @@ const User = db.User
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -37,26 +44,8 @@ app.post('record/:id/delete', (req, res) => {
   res.send('刪除支出')
 })
 
-app.get('/users/login', (req, res) => {
-  res.render('login')
-})
+app.use('/users', require('./routes/user'))
 
-app.post('/users/login', (req, res) => {
-  res.send('login')
-})
-
-app.get('/users/register', (req, res) => {
-  res.render('register')
-})
-
-app.post('/users/register', (req, res) => {
-  res.send('register')
-})
-
-app.get('/users/logout', (req, res) => {
-  res.send('logout')
-})
-
-app.listen(3000, (req, res) => {
-  console.log('App is running!')
+app.listen(port, (req, res) => {
+  console.log(`App is running on port ${port}!`)
 })
