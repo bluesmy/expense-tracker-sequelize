@@ -37,6 +37,26 @@ app.post('record/:id/delete', (req, res) => {
   res.send('刪除支出')
 })
 
+app.get('/users/login', (req, res) => {
+  res.render('login')
+})
+
+app.post('/users/login', (req, res) => {
+  res.send('login')
+})
+
+app.get('/users/register', (req, res) => {
+  res.render('register')
+})
+
+app.post('/users/register', (req, res) => {
+  res.send('register')
+})
+
+app.get('/users/logout', (req, res) => {
+  res.send('logout')
+})
+
 app.listen(3000, (req, res) => {
   console.log('App is running!')
 })
