@@ -3,6 +3,10 @@ const app = express()
 const port = 3000
 const db = require('./models')
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -36,6 +40,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/users', require('./routes/user'))
 app.use('/record', require('./routes/record'))
+app.use('/auth', require('./routes/auths'))
 
 app.listen(port, (req, res) => {
   console.log(`App is running on port ${port}!`)
