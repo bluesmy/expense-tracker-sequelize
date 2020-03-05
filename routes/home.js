@@ -13,6 +13,7 @@ router.get('/', authenticated, (req, res) => {
       if (!user) throw new Error("User not found!")
 
       return Record.findAll({
+        raw: true,
         where: {
           UserId: req.user.id
         }
@@ -43,9 +44,8 @@ router.get('/', authenticated, (req, res) => {
                 record.others = true
                 break
             }
-
-            return res.render('index', { records, totalAmount })
           }
+          return res.render('index', { records, totalAmount })
         })
         .catch(error => {
           return res.status(422).json(error)

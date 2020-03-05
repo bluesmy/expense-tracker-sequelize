@@ -88,12 +88,12 @@
             <h4 class="mr-4">{{ this.amount }}</h4>
           </td>
           <td class="align-middle">
-            <a href="/record/{{{this._id}}}/edit" class='btn btn-dark'>
+            <a href="/record/{{this.id}}/edit" class='btn btn-dark'>
               修改
             </a>
           </td>
           <td class="align-middle">
-            <form action="/record/{{{this._id}}}/delete?_method=DELETE" method="POST" style="display: contents;">
+            <form action="/record/{{this.id}}/delete?_method=DELETE" method="POST" style="display: contents;">
               <button type="submit" class="btn btn-danger mr-3">刪除</button>
             </form>
           </td>
